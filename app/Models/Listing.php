@@ -21,14 +21,21 @@ class Listing extends Model
     //     'description',
     // ];
 
-    public function scopeFilter($query, array $filters) {
-        if($filters['tag'] ?? false) {
-            $query->where('tags', 'like', '%'.$filters['tag'].'%');
+    public function scopeFilter($query, array $filters)
+    {
+        if ($filters['tag'] ?? false) {
+            $query->where('tags', 'like', '%' . $filters['tag'] . '%');
         }
-        if($filters['search'] ?? false) {
-            $query->where('title', 'like', '%'.$filters['search'].'%')
-            ->orWhere('description', 'like', '%'.$filters['search'].'%')
-            ->orWhere('tags', 'like', '%'.$filters['search'].'%');
+        if ($filters['search'] ?? false) {
+            $query->where('title', 'like', '%' . $filters['search'] . '%')
+                ->orWhere('description', 'like', '%' . $filters['search'] . '%')
+                ->orWhere('tags', 'like', '%' . $filters['search'] . '%');
         }
+    }
+
+    // Relationship to user.
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }
