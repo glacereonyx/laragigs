@@ -94,4 +94,14 @@ class ListingController extends Controller
 
         return back()->with('message', 'Listing edited successfully!');
     }
+
+    /**
+     * Destroy listing
+     */
+    public function destroy(Listing $listing)
+    {
+        $listing->delete();
+
+        return redirect('/')->with('message', 'Deleted successfully.');
+    }
 }
